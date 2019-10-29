@@ -64,10 +64,9 @@ public class MFU {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            if (!isLaunchMFU()) break;
+                            if (!isLaunchMFU()) return;
                         }
                         System.out.println(noNameManager.getChapters() + " страниц распечатано.");
-                        if (!isLaunchMFU()) break;
                     }
                 }
             }
@@ -80,13 +79,13 @@ public class MFU {
             public void run() {
                 Worker noNameManager;
 
-                System.out.println("Запуск контролера.");
+                System.err.println("Запуск контролера.");
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("К сканированию готов");
+                System.err.println("К сканированию готов");
 
                 while (isLaunchMFU()){
                     noNameManager = listScan.poll();
@@ -102,16 +101,15 @@ public class MFU {
                     } else {
 
                         for (int i = 1; i < noNameManager.getChapters(); i++) {
-                            System.out.println("Сканирую " + i + " страницу");
+                            System.err.println("Сканирую " + i + " страницу");
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            if (!isLaunchMFU()) break;
+                            if (!isLaunchMFU()) return;
                         }
-                        System.out.println(noNameManager.getChapters() + " страниц отсканировано.");
-                        if (!isLaunchMFU()) break;
+                        System.err.println(noNameManager.getChapters() + " страниц отсканировано.");
                     }
                 }
             }
